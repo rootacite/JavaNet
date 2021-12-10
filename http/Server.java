@@ -1,4 +1,4 @@
-package Server;
+package http;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -9,11 +9,16 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 
 public class Server {
-	public Server()
+	private HttpServer server=null;
+	public Server() throws IOException
 	{
-		HttpServer server = HttpServer.create(new InetSocketAddress(8001), 0);
+	    server = HttpServer.create(new InetSocketAddress(8001), 0);
         server.createContext("/index.html", new Index());
-        server.start();
+	}
+	
+	public void Start()
+	{
+		 server.start();
 	}
 
     static  class Index implements HttpHandler{
